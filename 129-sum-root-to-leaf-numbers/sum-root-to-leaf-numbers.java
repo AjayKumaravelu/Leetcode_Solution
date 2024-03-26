@@ -14,7 +14,6 @@
  * }
  */
 class Solution {
-    //int num = 0;
     public int dfs(TreeNode root,int num){
         if(root == null){
             return 0;
