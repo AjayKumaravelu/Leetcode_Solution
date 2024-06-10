@@ -22,6 +22,7 @@ class Solution {
             }
         }
 
+        // for traversing the array except uirst roe w and column
         for(int i = 1; i < n; i++){
             for(int j = 1; j < m; j++){
                 if(matrix[i][j] != 0){
@@ -32,6 +33,7 @@ class Solution {
             }
         }
 
+        // first traversing the column followed by row
         if(matrix[0][0] == 0){
             for(int i = 0; i < m; i++){
                 matrix[0][i] = 0;
