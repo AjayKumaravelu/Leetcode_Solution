@@ -1,25 +1,32 @@
 class Solution {
     public void nextPermutation(int[] nums) {
-        int n = nums.length;
-        
-        // Step 1: Find the largest index k such that nums[k] < nums[k + 1]
-        int k = n - 2;
-        while (k >= 0 && nums[k] >= nums[k + 1]) {
-            k--;
-        }
-        
-        // Step 2: Find the largest index l greater than k such that nums[k] < nums[l]
-        if (k >= 0) {
-            int l = n - 1;
-            while (l > k && nums[l] <= nums[k]) {
-                l--;
+         int n = nums.length;
+         // Step 1 :  We are going to find the break point in nums array
+         // As the breakpoint can happen at the position minimally on n-2
+         int ind = -1;
+         for(int i = n-2; i >= 0; i--){
+            if(nums[i] < nums[i+1]){
+                ind = i;
+                break;
             }
-            // Step 3: Swap the value of nums[k] with that of nums[l]
-            swap(nums, k, l);
-        }
-        
-        // Step 4: Reverse the sequence from nums[k + 1] up to and including the final element nums[n]
-        reverse(nums, k + 1, n - 1);
+         }
+
+         // edge case
+         if(ind == -1){
+            reverse(nums, 0, n-1);
+            return;
+         }
+
+         // Step 2 : We are going to find the number which is smallest greater than the breakpoint (ie: ind)
+         for(int i = n - 1; i > ind; i--){
+            if(nums[i] > nums[ind]){
+                swap(nums, i, ind);
+                break;
+            }
+         }
+
+         // Step 3: Sort/reverse the remaining array to make the nnext Permutation minimum
+        reverse(nums, ind+1, n-1);
     }
     
     private void swap(int[] nums, int i, int j) {
@@ -27,12 +34,12 @@ class Solution {
         nums[i] = nums[j];
         nums[j] = temp;
     }
-    
-    private void reverse(int[] nums, int start, int end) {
-        while (start < end) {
-            swap(nums, start, end);
+
+    private void reverse(int[] nums, int start, int end){
+        while(start < end){
+            swap(nums,start,end);
             start++;
             end--;
         }
-    }
+    }    
 }
