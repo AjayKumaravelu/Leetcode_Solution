@@ -1,46 +1,42 @@
 class Solution {
-  public List<List<Integer>> fourSum(int[] nums, int target) {
-    Arrays.sort(nums);
-    return kSum(nums, target, 0, 4);
-  }
-  
-public List<List<Integer>> kSum(int[] nums, long target, int start, int k) {
-    List<List<Integer>> result = new ArrayList<>();
-    if (start == nums.length) {
-      return result;
-    }
-    long averageValue = target / k;
-    if  (nums[start] > averageValue || averageValue > nums[nums.length - 1]) {
-      return result;
-    }
-    if (k == 2) {
-      return twoSum(nums, target, start);
-    }
-    for (int i = start; i < nums.length; ++i) {
-      if (i == start || nums[i - 1] != nums[i]) {
-        for (List<Integer> subset : kSum(nums, target - nums[i], i + 1, k - 1)) {
-          result.add(new ArrayList<>(Arrays.asList(nums[i])));
-          result.get(result.size() - 1).addAll(subset);
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        // Using optimal approach --> using two pointer
+        List<List<Integer>> ans = new ArrayList<>();
+        // Sort the array
+        Arrays.sort(nums);
+        // We are kind of keeping i and j as constant pointer where k an l does the two pointer approachjh
+        for(int i = 0; i < nums.length; i++){
+            // If the previous element same as current one we are moving to next
+            if(i > 0 && nums[i] == nums[i-1]) continue;
+            for(int j = i + 1; j <  nums.length; j++){
+                // If the previous element same as current one we are moving to next
+                if(j > i+1 && nums[j] == nums[j-1]) continue;
+                int k = j + 1;
+                int l = nums.length - 1;
+                while(k < l){
+                    long sum = nums[i];
+                    sum += nums[j];
+                    sum += nums[k];
+                    sum += nums[l];
+                    if(sum == target){
+                        List<Integer> temp = new ArrayList<>();
+                        temp.add(nums[i]);
+                        temp.add(nums[j]);
+                        temp.add(nums[k]);
+                        temp.add(nums[l]);
+                        ans.add(temp);
+                        k++;
+                        l--;
+                        // If the previous element same as current one we are moving to next
+                        while(k < l && nums[k] == nums[k-1]) k++;
+                        // If the previous element same as current one we are moving back
+                        while(k < l && nums[l] == nums[l+1]) l--;
+
+                    }else if(sum < target) k++;
+                    else l--;
+                }
+            }
         }
-      }
-    }
-    return result;
-  }
-	
-public List<List<Integer>> twoSum(int[] nums, long target, int start) {
-    List<List<Integer>> result = new ArrayList<>();
-    int low = start;
-    int high = nums.length - 1;
-    while (low < high) {
-      int currSum = nums[low] + nums[high];
-      if (currSum < target || (low > start && nums[low] == nums[low - 1])) {
-        ++low;
-      } else if (currSum > target || (high < nums.length - 1 && nums[high] == nums[high + 1])) {
-        --high;
-      } else {
-        result.add(Arrays.asList(nums[low++], nums[high--]));
-      }
-    }
-    return result;
-  }
+        return ans;
+   }
 }
