@@ -9,36 +9,35 @@
  * }
  */
 class Solution {
-    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
-        ListNode t1 = list1;
-        ListNode t2 = list2;
-        // Initialising the dummy Node with -1
-        ListNode dNode = new ListNode(-1);
-        // We are creating a temp variable pointing to dummy Node
-        ListNode temp = dNode;  
-        while(t1 != null && t2 != null){
-            if(t1.val < t2.val){
-                temp.next = t1;
-                temp = t1;
-                t1 = t1.next;
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        //ListNode l1 = list1;
+        //ListNode l2 = list2;
+        if(l1 == null){
+            return l2;
+        }
+        if(l2 == null){
+            return l1;
+        }
+        if(l1.val > l2.val){
+            ListNode temp = l1;
+            l1 = l2;
+            l2 = temp;
+        }
+
+        ListNode res = l1;
+        while(l1 != null && l2 != null){
+            ListNode temp1 = null;
+            while(l1 != null && l1.val <= l2.val){
+                temp1 = l1;
+                l1 = l1.next;
             }
-            else{
-                temp.next = t2;
-                temp = t2;
-                t2 = t2.next;
-            }
-        }
+            temp1.next = l2;
 
-        // Append remaining nodes if any
-        if(t1 != null){
-            temp.next = t1;
+            // swap
+            ListNode tmp = l1;
+            l1 = l2;
+            l2 = tmp; 
         }
-
-        if(t2 != null){
-            temp.next = t2;
-        }
-
-        // Return the head of the merged list
-        return dNode.next;
+        return res;
     }
 }
