@@ -20,6 +20,6 @@ public class Solution {
             b = b == null ? headB : b.next;
         }
 
-        return b;
+        return a;
     }
 }
