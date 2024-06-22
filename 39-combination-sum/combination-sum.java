@@ -1,23 +1,31 @@
 class Solution {
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> result = new ArrayList<>();
-        backtrack(candidates, target, 0, new ArrayList<>(), result);
-        return result;
+    public void findCombination(int index, int[] candidate, int target, List<List<Integer>> ans, List<Integer> ds){
+        // if the index == n that means we arrived at the last possibility
+        if(index == candidate.length){
+            if(target == 0){
+                ans.add(new ArrayList<>(ds));
+            }
+            return;
+        }
+
+        // if the arr[index] <= target then we will take that index or pick up the index
+        if(candidate[index] <= target){
+            // We will add the index
+            ds.add(candidate[index]);
+            // Call the recursive function to pick the index
+            findCombination(index,candidate, target - candidate[index],ans,ds);
+            //As we backtrack we have to remove the element
+            ds.remove(ds.size() - 1);
+        }
+
+        // Call the recursive function to not pick the index
+        findCombination(index + 1,candidate, target ,ans,ds);
     }
 
-    private void backtrack(int[] candidates, int target, int start, List<Integer> path, List<List<Integer>> result) {
-        if (target == 0) {
-            result.add(new ArrayList<>(path));
-            return;
-        }
-        if (target < 0) {
-            return;
-        }
-        for (int i = start; i < candidates.length; i++) {
-            path.add(candidates[i]);
-            // We can reuse the same element, so start remains i.
-            backtrack(candidates, target - candidates[i], i, path, result);
-            path.remove(path.size() - 1);
-        }
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        findCombination(0,candidates,target,ans, new ArrayList<>());
+        return ans;
     }
+    
 }
