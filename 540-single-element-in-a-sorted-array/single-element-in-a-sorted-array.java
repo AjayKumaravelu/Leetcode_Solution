@@ -5,7 +5,7 @@ class Solution {
         int high = nums.length - 2;
 
         while(low <= high){
-            int mid = (low + high)>>1;
+            int mid = (low + high)/2;
             // In left half 1st instance even and 2nd instance odd instead of two if we user xor;
             if(nums[mid] == nums[mid^1]){
                 low = mid + 1;
