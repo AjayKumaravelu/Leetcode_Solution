@@ -33,6 +33,10 @@ class MyStack {
     public boolean empty() {
         return q1.isEmpty();     
     }
+
+    public int size() {
+        return q1.size();
+    }
 }
 
 /**
