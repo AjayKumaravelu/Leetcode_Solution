@@ -1,52 +1,41 @@
 class MyQueue {
     // We are declaring two stacks
-    private Stack<Integer> s1;
-    private Stack<Integer> s2;
+    private Stack<Integer> input;
+    private Stack<Integer> output;
 
     public MyQueue() {
-        s1 = new Stack<>();
-        s2 = new Stack<>();   
+        input = new Stack<>();
+        output = new Stack<>();   
     }
     
     public void push(int x) {
-        s1.push(x);    
+        // We will push the element into the input stack
+        input.push(x);
     }
     
     public int pop() {
-    if(s2.isEmpty()){
-        while(!s1.isEmpty()){
-            s2.push(s1.pop());
+        // Transfer elements from input to output if output is empty
+        if (output.isEmpty()) {
+            while (!input.isEmpty()) {
+                output.push(input.pop());
+            }
         }
+        return output.pop();
     }
-
-    if(!s2.isEmpty()){
-        return s2.pop();
-    }
-    else{
-        // Handle empty queue scenario
-        //throw new NoSuchElementException("The queue is empty");
-        return -1;
-    }   
-}
     
     public int peek() {
-    if (s2.isEmpty()) {
-        while (!s1.isEmpty()) {
-            s2.push(s1.pop());
+        // Transfer elements from input to output if output is empty
+        if (output.isEmpty()) {
+            while (!input.isEmpty()) {
+                output.push(input.pop());
+            }
         }
+        return output.peek();
     }
-
-    if (!s2.isEmpty()) {
-        int front = s2.peek(); // Return the top element of s2 without removing it
-        return front;
-    } else {
-        //throw new NoSuchElementException("The queue is empty");
-        return -1;
-    }
-}
     
     public boolean empty() {
-        return s1.isEmpty() && s2.isEmpty();
+        // Queue is empty only if both input and output stacks are empty
+        return input.isEmpty() && output.isEmpty();
     }
 }
 
