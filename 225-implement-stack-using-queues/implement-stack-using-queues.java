@@ -1,58 +1,37 @@
 class MyStack {
     // We are using 2 Queues
     Queue<Integer> q1;
-    Queue<Integer> q2;
+
 
     public MyStack() {
         // Creating Linked List with each queue
         q1 = new LinkedList<>();
-        q2 = new LinkedList<>();   
     }
     
     public void push(int x) {
-        // Push the element into a non empty Queue
-        if(!q1.isEmpty()){
-            q1.offer(x);
-        }
-        else{
-            q2.offer(x);
+        // We use single queue to implement  it
+        // Step 1 we will push the element and move the top above the push element until size - 1
+        q1.add(x);
+        // We will traverse 
+        for(int i = 0; i < q1.size() - 1; i++){
+            //first i will push the top element above
+            q1.add(q1.peek());
+            // Then we will pop the top element
+            q1.remove();
         }
         
     }
     
     public int pop() {
-        // Move elements from non empty queue to empty queue, except the last one
-        if(q1.isEmpty() && q2.isEmpty()){
-            throw new RuntimeException("Stack is empty");
-        }
-
-        if(!q1.isEmpty()){
-            while(q1.size() > 1){
-                q2.offer(q1.poll());
-            }
-            return q1.poll();
-        }
-
-        else{
-            while(q2.size() > 1){
-                q1.offer(q2.poll());
-            }
-            return q2.poll();
-        }   
+        return q1.remove(); 
     }
     
     public int top() {
-        // Poping the top most element
-        int top = pop();
-        // Pushing the top element back after retrieving it
-        push(top);
-        return top;
-        
+        return q1.peek();
     }
     
     public boolean empty() {
-        // Checking both q1 and q2 whether it is empty or not
-        return q1.isEmpty() && q2.isEmpty();     
+        return q1.isEmpty();     
     }
 }
 
