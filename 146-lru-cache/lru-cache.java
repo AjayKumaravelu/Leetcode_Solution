@@ -55,10 +55,11 @@ class LRUCache {
 
     private void insert(Node node) {
         map.put(node.key, node);
-        node.next = head.next;
-        node.next.prev = node;
+        Node newHead = head.next;
         head.next = node;
         node.prev = head;
+        node.next = newHead;
+        newHead.prev = node;
     }
 }
 
