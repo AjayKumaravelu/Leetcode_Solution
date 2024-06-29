@@ -1,4 +1,4 @@
-class Solution {
+ class Solution {
     public String longestPalindrome(String s) {
         int count = -1;
         String ans = "";
