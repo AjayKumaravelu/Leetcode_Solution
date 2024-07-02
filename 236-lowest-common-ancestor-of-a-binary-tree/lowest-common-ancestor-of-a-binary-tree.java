@@ -18,17 +18,17 @@ class Solution {
         TreeNode left = lowestCommonAncestor(root.left,p,q);
         TreeNode right = lowestCommonAncestor(root.right,p,q);
         
-        // If both left and right subtrees return non-null, root is LCA
-        if(left != null && right != null){
-            return root;
+        // As the left is null return right
+        if(left == null){
+            return right;
         }
-        // LCA found in left subtree
-        else if(left != null){
+        // As right is null then returen left
+        else if(right == null){
             return left;
         }
-        // LCA found in right subtree
+        // both left and right  are found then we got the answer
         else{
-            return right;
+            return root;
         }
 
     }
