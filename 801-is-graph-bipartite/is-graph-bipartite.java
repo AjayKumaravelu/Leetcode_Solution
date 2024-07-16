@@ -1,4 +1,19 @@
 class Solution {
+    private boolean dfs(int start,int col, int[] color, int[][] graph){
+        color[start] = col;
+
+        // traverse the graph
+        for(int it: graph[start]){
+            if(color[it] == -1){
+                if (dfs(it, 1 - col, color, graph) == false)
+                    return false;
+            }
+            else if(color[it] == col)
+                return false;
+        }
+        return true;
+    }
+
     private boolean check(int start, int v, int[][] graph, int[] color){
         // using bfs so we are using queue
         Queue<Integer> q = new LinkedList<Integer>();
@@ -34,7 +49,7 @@ class Solution {
         // Checking for all the components
         for(int i = 0; i < v; i++){
             if(color[i] == -1)
-                if (check(i,v,graph,color) == false)
+                if (dfs(i,0,color,graph) == false)
                     return false;
         }
         return true;
