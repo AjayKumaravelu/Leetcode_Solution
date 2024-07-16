@@ -1,4 +1,5 @@
 class Solution {
+    // Using DFS
     private boolean dfs(int start,int col, int[] color, int[][] graph){
         color[start] = col;
 
@@ -14,6 +15,7 @@ class Solution {
         return true;
     }
 
+    // Using BFS
     private boolean check(int start, int v, int[][] graph, int[] color){
         // using bfs so we are using queue
         Queue<Integer> q = new LinkedList<Integer>();
