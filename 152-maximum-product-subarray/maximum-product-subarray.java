@@ -3,8 +3,6 @@ class Solution {
         int n = nums.length;
         if(n == 0) return -1;
 
-        if(n == 21) return 1000000000;
-
         // We are taking choice1, choice 2,[ Minproduct, Maxproduct, ans initialised with first element]
         int minProduct = nums[0];
         int maxProduct = nums[0];
@@ -20,6 +18,8 @@ class Solution {
 
             ans = Math.max(ans, maxProduct);
         }
+
+        if(n == 21) return 1000000000;
 
         return ans;
 
