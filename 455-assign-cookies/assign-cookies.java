@@ -6,13 +6,14 @@ class Solution {
         Arrays.sort(g);
         Arrays.sort(s);
 
-        int l = 0, r = 0;
+        int left = 0, right = 0;
 
-        while(l < m && r < n){
-            if(g[r] <= s[l]) r = r + 1;
-            l = l + 1;
+        // Left point on s and right point on g
+        while(left < m && right < n){
+            if(g[right] <= s[left]) right = right + 1;
+            left = left + 1;
         }
 
-        return r;
+        return right;
     }
 }
