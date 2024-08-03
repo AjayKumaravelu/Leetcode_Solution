@@ -42,6 +42,7 @@ class Solution {
         return -1;
     }
     public int strStr(String haystack, String needle) {
+        // Using Rabin Karp Algorithm
         return Search(haystack, needle);
     }
 }
