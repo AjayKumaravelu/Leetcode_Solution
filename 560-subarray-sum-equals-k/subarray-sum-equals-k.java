@@ -8,7 +8,6 @@ class Solution {
 
                 if(ans == k){
                     count++;
-                    //ans = 0;
                 }
 
             }
