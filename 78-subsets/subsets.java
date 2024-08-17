@@ -1,5 +1,6 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums){
+        // Bit manipulation
         int subsets = 1 << nums.length;
         List<List<Integer>> ans = new ArrayList<>();
         
