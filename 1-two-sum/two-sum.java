@@ -12,5 +12,22 @@ class Solution {
             map.put(nums[i],i);
         }
         return ans;
+
+
+        // Using two pointer approach
+        // int n = nums.length;
+        // int left = 0;
+        // int right = n - 1;
+        // int sum = 0;
+        // while(left <= right){
+        //     sum = left + right;
+        //     if(sum == target){
+        //         return "YES";
+        //     } 
+        //     else if(sum < target) left++;
+        //     else right--;
+        // }
+        // return "N0";
+
     }
 }
