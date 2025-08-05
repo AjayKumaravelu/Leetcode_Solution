@@ -44,9 +44,9 @@
 
         for(int i = 0; i < n; i++){
             for(int j = i; j < n; j++){
-                if(isPalindrome(s.substring(i,j + 1)) && j - i + 1 > max){
+                if(isPalindrome(s.substring(i,j + 1)) && s.substring(i,j + 1).length() > max){
                     start = i;
-                    max = j - i + 1;
+                    max = s.substring(i,j + 1).length();
                 }
             }
         }
