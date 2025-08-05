@@ -17,6 +17,11 @@ class Solution {
             }
         }
 
+        // Unbalanced String
+        if(currMax != 0){
+            return -1;
+        }
+
         return max;
     }
 }
