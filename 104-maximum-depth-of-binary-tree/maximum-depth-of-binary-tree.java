@@ -52,4 +52,8 @@ class Solution {
     //     }
     //     return level;
     //}
+
+    public int maxDepth1(TreeNode root){
+        return 0;
+    }
 }
