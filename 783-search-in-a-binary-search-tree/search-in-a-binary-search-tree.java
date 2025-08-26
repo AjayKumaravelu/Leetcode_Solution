@@ -15,8 +15,9 @@
  */
 class Solution {
     public TreeNode searchBST(TreeNode root, int val) {
-        while(root != null && root.val != val){
-            root = val < root.val ? root.left : root.right;
+        // We will traverse the tree until the root is null or root.val = val
+        while(root != null  && root.val != val){
+            root = root.val > val ? root.left : root.right;
         }
         return root;
     }
