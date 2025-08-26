@@ -15,17 +15,12 @@
  */
 class Solution {
     public boolean valid(TreeNode root, long minVal, long maxVal){
-        // If root is null return true
-        if(root == null){
-            return true;
-        }
+        if(root == null) return true;
 
-        // If the root val lies outside range of minVal and maxVal
-        if(root.val >= maxVal || root.val <= minVal){
+        if(root.val <= minVal || root.val >= maxVal){
             return false;
         }
-        
-        // If we go to root.left then min = minVal & max = root.val // If we go to root.right then min = root.val & max = maxVal
+
         return valid(root.left, minVal, root.val) && valid(root.right, root.val, maxVal);
     }
 
@@ -33,3 +28,18 @@ class Solution {
         return valid(root, Long.MIN_VALUE, Long.MAX_VALUE);
     }
 }
+
+
+
+// If root is null return true
+        // if(root == null){
+        //     return true;
+        // }
+
+        // // If the root val lies outside range of minVal and maxVal
+        // if(root.val >= maxVal || root.val <= minVal){
+        //     return false;
+        // }
+        
+        // // If we go to root.left then min = minVal & max = root.val // If we go to root.right then min = root.val & max = maxVal
+        // return valid(root.left, minVal, root.val) && valid(root.right, root.val, maxVal);
