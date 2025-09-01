@@ -10,21 +10,38 @@ class Solution {
         // return dp[index] = Math.max(pick, notPick);
 
         // Tabulation Approach
-        dp[0] = nums[0];
+        // dp[0] = nums[0];
+
+        // for(int i = 1; i < index; i++){
+        //     int pick = nums[i];
+        //     if(i > 1){
+        //         pick += dp[i-2];
+        //     }
+
+        //     int notPick = dp[i-1];
+
+        //     dp[i] = Math.max(pick, notPick);
+        // }
+
+        // return dp[index-1];
+
+
+        // Space Optimization
+        int prev = nums[0];
+        int prev1 = 0;
 
         for(int i = 1; i < index; i++){
             int pick = nums[i];
-            if(i > 1){
-                pick += dp[i-2];
-            }
 
-            int notPick = dp[i-1];
+            if(i > 1) pick += prev1;
 
-            dp[i] = Math.max(pick, notPick);
+            int notPick = prev;
+
+            int curr_i = Math.max(pick, notPick);
+            prev1 = prev;
+            prev = curr_i;
         }
-
-        return dp[index-1];
-
+        return prev;
     }
     public int rob(int[] nums) {
         int[] dp = new int[nums.length];
