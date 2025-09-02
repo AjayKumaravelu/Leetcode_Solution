@@ -3,7 +3,7 @@ class Solution {
         int[][] dp = new int[m][n];
         for (int[] row : dp)
             Arrays.fill(row, -1);
-        return uniquePathsMemoization(m-1, n-1, dp);
+        return uniquePathsTabulation(m, n, dp);
     }
     public int uniquePathsRecursive(int m, int n) {
         // Using recursion
@@ -39,6 +39,31 @@ class Solution {
         int left = uniquePathsMemoization(i, j-1, dp);
 
         return dp[i][j] = up + left;
+    }
+
+    public int uniquePathsTabulation(int m, int n, int[][] dp){
+        // Tabulation is a bottom up Approach
+
+        // I am traversing in the horizontal Direction
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
+                if (i == 0 && j == 0) {
+                    dp[i][j] = 1; // Starting point
+                    continue;
+                } 
+
+                int up = 0;
+                int left = 0;
+                if(i > 0)
+                    up = dp[i - 1][j];
+                if(j > 0)
+                    left = dp[i][j - 1];
+                
+                dp[i][j] = up + left;
+            }
+        }
+
+        return dp[m-1][n-1];
 
     }
 }
