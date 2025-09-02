@@ -9,7 +9,7 @@ class Solution {
         for(int[] row: dp){
             Arrays.fill(row, -1);
         }
-        return uniquePathTabulation(n, m, obstacleGrid, dp);
+        return uniquePathOptimized(n, m, obstacleGrid);
     }
 
     public int uniquePathRecursion(int i, int j, int[][] arr){
@@ -71,5 +71,36 @@ class Solution {
 
         return dp[n-1][m-1];
         
+    }
+
+    public int uniquePathOptimized(int n, int m, int[][] arr){
+        int[] prev = new int[m];
+
+        for(int i = 0; i < n; i++){
+            int[] temp = new int[m];
+            for(int j = 0; j < m; j++){
+                if(i == 0 && j == 0){
+                    temp[i] = 1;
+                    continue;
+                }
+
+                if(i >= 0 && j >= 0 && arr[i][j] == 1){
+                    temp[j] = 0;
+                    continue;
+                }
+
+                int up = 0;
+                int left = 0;
+
+                if(i > 0) up = prev[j];
+                if(j > 0) left = temp[j - 1];
+
+                temp[j] = up + left;
+            }
+
+            prev = temp;
+        }
+
+        return prev[m-1];
     }
 }
