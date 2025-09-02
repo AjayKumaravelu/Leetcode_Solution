@@ -3,7 +3,7 @@ class Solution {
         int[][] dp = new int[m][n];
         for (int[] row : dp)
             Arrays.fill(row, -1);
-        return uniquePathsTabulation(m, n, dp);
+        return uniquePathsOptimization(m, n);
     }
     public int uniquePathsRecursive(int m, int n) {
         // Using recursion
@@ -15,6 +15,7 @@ class Solution {
         int left = uniquePathsRecursive(m, n-1);
 
         return up + left;
+
         // int N = n + m - 2;
         // int R = m - 1;
         // double result = 1;
@@ -65,5 +66,35 @@ class Solution {
 
         return dp[m-1][n-1];
 
+    }
+
+    public int uniquePathsOptimization(int m, int n){
+        int[] prev = new int[n];
+
+        for(int i = 0; i < m; i++){
+            int[] temp = new int[n];
+            for(int j = 0; j < n; j++){
+                if(i == 0 && j == 0){
+                    temp[j] = 1;
+                    continue;
+                }
+
+                int up = 0;
+                int left = 0;
+
+                if(i > 0){
+                    up = prev[j];
+                }
+
+                if(j > 0){
+                    left = temp[j - 1];
+                }
+
+                temp[j] = up + left;
+            }
+            prev = temp;
+        }
+
+        return prev[n - 1];
     }
 }
