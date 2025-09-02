@@ -9,7 +9,7 @@ class Solution {
         for(int[] row: dp){
             Arrays.fill(row, -1);
         }
-        return uniquePathMemoization(n-1, m-1, obstacleGrid, dp);
+        return uniquePathTabulation(n, m, obstacleGrid, dp);
     }
 
     public int uniquePathRecursion(int i, int j, int[][] arr){
@@ -39,4 +39,37 @@ class Solution {
 
         return dp[i][j] = up + left;
     } 
+
+
+    public int uniquePathTabulation(int n, int m, int[][] arr, int[][] dp){
+        // Bottom Up Approach
+
+        // We will traverse the grid
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(i == 0 && j == 0){
+                    dp[0][0] = 1;
+                    continue;
+                }
+
+                if(i >= 0 && j >= 0 && arr[i][j] == 1){
+                    dp[i][j] = 0;
+                    continue;
+                }
+
+                int up = 0;
+                int left = 0;
+
+                
+                if(i > 0) up = dp[i-1][j];
+                if(j > 0) left = dp[i][j-1];
+                
+
+                dp[i][j] = up + left;
+            }
+        }
+
+        return dp[n-1][m-1];
+        
+    }
 }
